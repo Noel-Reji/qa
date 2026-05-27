@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  office-qa:
+    build: .
+    container_name: office-qa
+    volumes:
+      - ./data/corpus:/app/data/corpus
+      - ./data/results:/app/data/results
+      - ./logs:/app/logs
+    environment:
+      - LLM_PROVIDER=openai
+      - LLM_API_KEY=${LLM_API_KEY}
+      - ENVIRONMENT=production
+      - LOGGING_LOG_LEVEL=INFO
+    command: ask "What is in the documents?"
